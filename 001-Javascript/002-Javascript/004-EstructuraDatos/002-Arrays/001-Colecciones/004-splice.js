@@ -1,5 +1,5 @@
 //Arrays
-var agenda = [];
+var agenda = ["clala","gssisis"];
 agenda[0] = "Claudia Rubio";
 agenda[1] = "Mateo";
 agenda[2] = "Cometa";
@@ -14,5 +14,5 @@ console.table(agenda);
 
 //splice quita el numero de elementos que indiquemos
 //recibe dos atributos: indice y cuantos
-agenda.splice(0,1);
+agenda.splice(0,2);
 console.table(agenda);

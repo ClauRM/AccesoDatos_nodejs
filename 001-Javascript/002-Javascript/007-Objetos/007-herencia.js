@@ -46,5 +46,6 @@ persona1.setNombre("Claudia");
 
 //salida
 //persona1.saludar();
+console.log(persona1.getNombre());
 console.log(persona1.saludar());
 console.log(persona1.respira()); //funcion del animal que se ha extendido a la persona
