@@ -9,8 +9,8 @@ servidor.createServer(function (req, res) {
     //leer archivo con posibilidad de error y de datos
     archivo.readFile(rutaArchivo, function (err, data) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.write(data)
-        res.end("")
+        res.write(data);
+        res.end("");
     });
 
 }).listen(8080) //puerto 8080
