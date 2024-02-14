@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>Contacto Node</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <p>Pulsa en un enlace del menu:</p>
+    <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/aboutme">Sobre nosotros</a></li>
+        <li><a href="/contact">Contacto</a></li>
+    </ul>
+    <h1>Ventana de Contacto</h1>
+    <form action="/procesa" method="POST">
+        <input type="text" name="nombre" placeholder="Nombre"><br><br>
+        <input type="text" name="asunto" placeholder="Asunto"><br><br>
+        <input type="email" name="email" placeholder="Email"><br><br>
+        <textarea name="mensaje"></textarea><br><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>
