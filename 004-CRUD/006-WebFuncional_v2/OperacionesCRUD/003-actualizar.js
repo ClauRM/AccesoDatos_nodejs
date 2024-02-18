@@ -5,7 +5,7 @@ var conexion = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "nodejsweb" //indicar nombre de la base de datos
+    database: "nodejsweb"
 });
 
 //realizar conexion
@@ -14,16 +14,12 @@ conexion.connect(function (err) {
     console.log("Conectado");
     //ejecutar query sql
     conexion.query(`
-        CREATE TABLE entradasblog (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            autor VARCHAR (255),
-            titulo VARCHAR(255),
-            texto TEXT,
-            fecha VARCHAR(255)
-            )
-        `,
+        UPDATE entradasblog
+        SET titulo = '¿Seguro has probado a reiniciar?'
+        WHERE id = 1
+    `,
         function (err, resultado) {
             if (err) throw err;
-            console.log("Se ha creado la tabla");
+            console.log("Se ha actualizado el registro en la base de datos");
         });
 });

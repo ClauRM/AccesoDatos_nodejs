@@ -12,7 +12,7 @@ conexion.connect(function (err) {
     if (err) throw err;
     console.log("Conectado");
     //ejecutar query sql
-    conexion.query("CREATE DATABASE nodejs", function (err, resultado) {
+    conexion.query("CREATE DATABASE nodejsweb", function (err, resultado) {
         if (err) throw err;
         console.log("Se ha creado la base de datos");
     });
