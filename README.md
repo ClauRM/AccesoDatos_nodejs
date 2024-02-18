@@ -10,4 +10,5 @@ https://youtu.be/BValjfgm7V4
 Creación de servidores web en Node.js con página web funcional, integrando contenido HTML estático con JavaScript de Node.js:
 https://youtu.be/Da-U_O9GPaA
 
-Creación de servidores web en Node.js con contenido HTMLs estático y dinámico; y creación de formularios con lectura y persistencia de datos en Base de Datos MySQL:
+Creación de servidores web en Node.js con contenido web estático cargado desde ficheros HTML. Contenido web dinámico cargado desde Base de Datos My SQL. Lectura de datos de formularios con persistencia de datos en objeto json:
+https://youtu.be/pq9O6L3cpiU
