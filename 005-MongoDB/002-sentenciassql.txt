@@ -1,0 +1,70 @@
+Sentencias a ejecutar desde mongo shell: >_MONGOSH
+
+Crear base de datos:
+use contacto;
+
+Crear colección:
+db.createCollection("formularios");
+
+Insertar un registro como json:
+db.formularios.insertOne(
+    {
+    nombre: "Claudia Rubio",
+    asunto: "Este es el primer correo",
+    mensaje: "Este mensaje es para ti",
+    fecha: "2024-02-24"
+    }
+);
+
+Insertar varios registros como json:
+db.formularios.insertMany([
+    {
+    nombre: "Claudia Rubio",
+    asunto: "Este es el segundo correo",
+    mensaje: "Este mensaje es para ti 2 veces",
+    fecha: "2024-02-24"
+    },
+        {
+    nombre: "Claudia Rubio",
+    asunto: "Este es el tercer correo",
+    mensaje: "Este mensaje es para ti 3 veces",
+    fecha: "2024-02-24"
+    },
+        {
+    nombre: "Claudia Rubio",
+    asunto: "Este es el cuarto correo",
+    mensaje: "Este mensaje es para ti 4 veces",
+    fecha: "2024-02-24"
+    }
+]);
+
+Buscar registros:
+db.formularios.find();
+
+Buscar el primer registro:
+db.formularios.findOne();
+
+Buscar registros con filtros:
+db.formularios.find({asunto:"Este es el tercer correo"});
+
+Actualizar registro:
+db.formularios.updateOne(
+    {asunto:"Este es el tercer correo"},
+    {$set:{fecha: "2023-12-31"}}
+    );
+
+Actualizar varios registros:
+db.formularios.updateMany(
+    {},
+    {$set:{fecha: "2024-02-23"}}
+    );
+
+Eliminar un registro:
+db.formularios.deleteOne(
+    {asunto:"Este es el cuarto correo"}
+    );
+
+Eliminar varios registros:
+db.formularios.deleteMany(
+    {nombre:"Claudia Rubio"}
+    );

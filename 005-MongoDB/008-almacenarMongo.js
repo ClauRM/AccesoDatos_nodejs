@@ -2,6 +2,41 @@ var servidor = require('http');//require permite importar modulos
 var archivo = require('fs');//libreria para leer archivos
 var procesador = require('querystring');//utilidades para trabajar con cadenas
 var mysql = require('mysql'); //utilidad para trabajar con bd
+var mongoose = require('mongoose'); //npm install mongoose
+
+const conexionmongoose = "mongodb://localhost:27017/contacto"; //url + base de datos
+
+//crear esquema para mostrar lo que va a recibir
+const formularioSchema = new
+    mongoose.Schema({
+        nombre: String,
+        asunto: String,
+        email: String,
+        mensaje: String
+    });
+
+//crear elemento Formulario con el modelo de datos formularioShema
+const Formulario = mongoose.model("Formulario", formularioSchema);
+
+//realizar conexion a la bd mongo DB
+mongoose.connect(conexionmongoose)
+    .then(function () {
+        console.log("Conectado a MongoDB");
+    });
+
+//crear variable con los datos de conexion a phpmyadmin
+var conexion = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "nodejs"
+});
+
+//realizar conexion a la base de datos phpmyadmin
+conexion.connect(function (err) {
+    if (err) throw err;
+    console.log("Conectado a MySql.");
+});
 
 //crear servidor web haciendo require y response
 servidor.createServer(function (req, res) {
@@ -9,26 +44,12 @@ servidor.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });//tipo de contenido a devolver
 
     //__dirname asegura que la ruta del archivo es correcta
-    const rutaCabecera = __dirname + "/header.html";
-    const rutaPiepagina = __dirname + "/footer.html";
-    const rutaIndex = __dirname + "/index.html";
-    const rutaAboutme = __dirname + "/aboutme.html";
-    const rutaContact = __dirname + "/contact.html";
-    const rutaBlog = __dirname + "/blog.html";
-
-    //crear conexion a la base de datos phpmyadmin
-    var conexion = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "nodejs"
-    });
-
-    //establecer conexion
-    conexion.connect(function (err) {
-        if (err) throw err;
-        console.log("Conectado.");
-    });
+    const rutaCabecera = __dirname + "/src/header.html";
+    const rutaPiepagina = __dirname + "/src/footer.html";
+    const rutaIndex = __dirname + "/src/index.html";
+    const rutaAboutme = __dirname + "/src/aboutme.html";
+    const rutaContact = __dirname + "/src/contact.html";
+    const rutaBlog = __dirname + "/src/blog.html";
 
     //cargar los html
     archivo.readFile(rutaCabecera, function (err, data) {
@@ -87,6 +108,25 @@ servidor.createServer(function (req, res) {
                 req.on("end", () => {
                     var cadenaProcesada = procesador.parse(datos); //procesar cadena de dato como objeto
                     console.log(cadenaProcesada);
+                    //capturar datos en variables
+                    var nnombre = cadenaProcesada.nombre;
+                    var nasunto = cadenaProcesada.asunto;
+                    var nemail = cadenaProcesada.email;
+                    var nmensaje = cadenaProcesada.mensaje;
+                    //crear nuevo registro con los datos a insertar
+                    var nuevoFormulario = new Formulario(
+                        {
+                            nombre: nnombre,
+                            asunto: nasunto,
+                            email: nemail,
+                            mensaje: nmensaje
+                        }
+                    );
+                    //ejecutar sentencia insertar registro
+                    nuevoFormulario.save()
+                        .then(function () {//despues de ejecutar hacer...
+                            console.log("Registro insertado correctamente.");
+                        })
                 });
                 break;
             default:
@@ -110,5 +150,5 @@ servidor.createServer(function (req, res) {
             if (err) throw err;
         });
     }
-    
+
 }).listen(8080) //puerto 8080

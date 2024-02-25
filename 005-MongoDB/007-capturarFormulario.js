@@ -9,12 +9,12 @@ servidor.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });//tipo de contenido a devolver
 
     //__dirname asegura que la ruta del archivo es correcta
-    const rutaCabecera = __dirname + "/header.html";
-    const rutaPiepagina = __dirname + "/footer.html";
-    const rutaIndex = __dirname + "/index.html";
-    const rutaAboutme = __dirname + "/aboutme.html";
-    const rutaContact = __dirname + "/contact.html";
-    const rutaBlog = __dirname + "/blog.html";
+    const rutaCabecera = __dirname + "/src/header.html";
+    const rutaPiepagina = __dirname + "/src/footer.html";
+    const rutaIndex = __dirname + "/src/index.html";
+    const rutaAboutme = __dirname + "/src/aboutme.html";
+    const rutaContact = __dirname + "/src/contact.html";
+    const rutaBlog = __dirname + "/src/blog.html";
 
     //crear conexion a la base de datos phpmyadmin
     var conexion = mysql.createConnection({
@@ -87,6 +87,12 @@ servidor.createServer(function (req, res) {
                 req.on("end", () => {
                     var cadenaProcesada = procesador.parse(datos); //procesar cadena de dato como objeto
                     console.log(cadenaProcesada);
+                    //capturar datos en variables
+                    var nombre = cadenaProcesada.nombre;
+                    var asunto = cadenaProcesada.asunto;
+                    var email = cadenaProcesada.email;
+                    var mensaje = cadenaProcesada.mensaje;
+                    
                 });
                 break;
             default:
