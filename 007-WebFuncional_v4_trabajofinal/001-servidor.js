@@ -121,16 +121,21 @@ servidor.createServer(function (req, res) {
                                 //escribir contenido en la tabla
                                 res.write(`
                             <tr>
-                              <th scope="row">`+ resultado[i].idtratamiento + `</th>
-                              <td>`+ resultado[i].medicamento + `</td>
-                              <td>`+ resultado[i].fecha + `</td>
-                              <td>`+ resultado[i].idtratamiento + `</td>
+                                <td style="display: none;">`+ resultado[i].idtratamiento + `</td>
+                                <td>`+ resultado[i].medicamento + `</td>
+                                <td>`+ resultado[i].fecha + `</td>
+                                <td>`+ resultado[i].hora + `</td>
+                                <td>`+ resultado[i].comentarios + `</td>
                             </tr>
                             `);
                             }
                             //cerrar etiqueta tabla fuera del bucle for
-                            res.write(`
-                            </table>`)
+                            res.write(`</tbody></table>`);
+                            //footer fuera del bucle for
+                            archivo.readFile(rutaFooter, function (err, footerData) {
+                                res.write(footerData);
+                                res.end();
+                            });
                         });
                 });
                 break;
@@ -228,16 +233,6 @@ servidor.createServer(function (req, res) {
                 res.end("Pagina no encontrada");
                 break;
         };
-
-        // //pie de pagina html
-        // archivo.readFile(rutaFooter, function (err, footerData) {
-        //     if (err) {
-        //         throw err;
-        //     }
-        //     res.write(footerData);
-        //     res.end(); // Finalizar la respuesta después de enviar el pie de página
-        // });
-
     });
 
     //Formulario de la url visitada por el usuario
@@ -249,6 +244,5 @@ servidor.createServer(function (req, res) {
             if (err) throw err;
         });
     }
-
 
 }).listen(8080) //puerto 8080
