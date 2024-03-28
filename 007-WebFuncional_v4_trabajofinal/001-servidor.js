@@ -67,7 +67,7 @@ servidor.createServer(function (req, res) {
                 archivo.readFile(rutaFooter, function (err, footerData) {
                     res.write(footerData);
                     res.end();
-                });                
+                });
                 break;
             case "/blog":
                 archivo.readFile(rutaBlog, function (err, blogData) {
@@ -84,7 +84,6 @@ servidor.createServer(function (req, res) {
                     function (err, resultado, fields) {
                         if (err) throw err;
                         for (let i = 0; i < resultado.length; i++) {
-                            console.log(resultado[i]);
                             //escribir contenido web dinamico
                             res.write(`
                                 <div class="d-flex justify-content-center">
@@ -99,11 +98,19 @@ servidor.createServer(function (req, res) {
                                 <hr>
                                 `)
                         }
+                        archivo.readFile(rutaFooter, function (err, footerData) {
+                            res.write(footerData);
+                            res.end();
+                        });
                     });
                 break;
             case "/faqs":
                 archivo.readFile(rutaFaqs, function (err, faqsData) {
                     res.write(faqsData);
+                });
+                archivo.readFile(rutaFooter, function (err, footerData) {
+                    res.write(footerData);
+                    res.end();
                 });
                 break;
             case "/treatment":
@@ -117,7 +124,6 @@ servidor.createServer(function (req, res) {
                         function (err, resultado, fields) {
                             if (err) throw err;
                             for (let i = 0; i < resultado.length; i++) {
-                                console.log(resultado[i]);
                                 //escribir contenido en la tabla
                                 res.write(`
                             <tr>
@@ -142,6 +148,11 @@ servidor.createServer(function (req, res) {
             case "/contact":
                 archivo.readFile(rutaContact, function (err, contactData) {
                     res.write(contactData);
+                });
+                //footer
+                archivo.readFile(rutaFooter, function (err, footerData) {
+                    res.write(footerData);
+                    res.end();
                 });
                 break;
             case "/procesa":
@@ -224,7 +235,7 @@ servidor.createServer(function (req, res) {
                         archivo.readFile(rutaFooter, function (err, footerData) {
                             res.write(footerData);
                             res.end();
-                        });   
+                        });
                     });
                 });
 

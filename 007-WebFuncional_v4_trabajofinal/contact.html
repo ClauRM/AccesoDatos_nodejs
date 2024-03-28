@@ -1,35 +1,39 @@
 
     <!--CONTENIDO DE CONTACTO-->
-    <div class="px-4 py-5 my-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt=""
-            width="72" height="57">
-        <h1 class="display-5 fw-bold text-body-emphasis">Contacto</h1>
+    <div class="px-4 my-2 text-center">
+        <div class="d-flex justify-content-center">
+            <img class="mb-4 mx-2" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt=""
+                width="72" height="57">
+            <h1 class="display-5 fw-bold text-body-emphasis">Contacto</h1>
+        </div>
         <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum vel quos cupiditate
-                maxime, delectus eum aliquam iste excepturi qui itaque optio nesciunt dolores inventore corporis vero ea
-                dolor aliquid a.</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"/>
+                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+            </svg>
+            <p class="lead"> ¿Quieres saber más? ¿Alguna sugerencia? Tu opinión es valiosa. Envíanos tus consultas u opiniones y nos pondremos en contacto contigo.</p>
         </div>
     </div>
 
         <!--FORMULARIO DE CONTACTO-->
         <form class="d-flex justify-content-center" action="/procesa" method="POST">
-        <div class="px-4 py-5 my-5 w-50">
-            <div class="mb-3">
+        <div class="px-4 py-2 w-50">
+            <div class="mb-1">
                 <label for="exampleFormControlInput1" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1"
                     placeholder="Cómo quieres que te llamemos" name="nombre">
             </div>
-            <div class="mb-3">
+            <div class="mb-1">
                 <label for="exampleFormControlInput1" class="form-label">Fecha</label>
                 <input type="date" class="form-control" id="exampleFormControlInput1" name="fecha">
             </div>
-            <div class="mb-3">
+            <div class="mb-1">
                 <label for="exampleFormControlInput1" class="form-label">Email de contacto</label>
                 <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="email@email.com" name="email">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Comentarios:</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comentarios"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="comentarios"></textarea>
             </div>
             <input type="submit" class="btn btn-primary"></input>
         </div>
