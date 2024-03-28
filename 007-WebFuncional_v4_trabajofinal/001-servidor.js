@@ -54,8 +54,8 @@ servidor.createServer(function (req, res) {
     const rutaFooter = __dirname + "/footer.html";
 
     //cargar encabezado y pie de pagina conjunto para todos los html
-    archivo.readFile(rutaHeader, function (err, data) {
-        res.write(data); //mostrar la cabecera
+    archivo.readFile(rutaHeader, function (err, dataHeader) {
+        res.write(dataHeader); //mostrar la cabecera
 
         //enrutador
         //con switch devolvemos mensaje en funcion de lo leido en url
@@ -63,6 +63,7 @@ servidor.createServer(function (req, res) {
             case "/":
                 archivo.readFile(rutaIndex, function (err, indexData) {
                     res.write(indexData);
+                    res.end();
                 });
                 break;
             case "/blog":
@@ -169,6 +170,56 @@ servidor.createServer(function (req, res) {
                         })
                 });
                 break;
+            case "/registro":
+                res.write(`
+                        <div class="px-5">
+                            <p>Tu tratamiento se ha registrado correctamente.</p> <br>
+                            <p>Vuelve a Inicio para registrar un nuevo tratamiento y a Tratamientos para consultar todos los tratamientos</p>
+                        </div>         
+                         `);
+                let datosRegistro = ""; //var almacenar datos recibidos
+                //listener del lado del servidor
+                req.on("data", parte => {
+                    datosRegistro += parte.toString(); //concatenar datos recibidos clave=valor
+                });
+                req.on("end", () => {
+                    var cadenaProcesada = procesador.parse(datos); //procesador querystring de cadena de dato como objeto
+                    //capturar datos en variables
+                    var nmedicamento = cadenaProcesada.medicamento;
+                    var nfecha = cadenaProcesada.fecha;
+                    var nhora = cadenaProcesada.hora;
+                    var ncomentarios = cadenaProcesada.comentarios;
+
+                    //escribir la sentencia SQL
+                    const sql = `
+                            INSERT INTO tratamientos (campo1, campo2, campo3, campo4)
+                            VALUES (NULL, ?, ?, ?, ?)
+                        `;
+
+                    //pasar los valores de las variables como un array en el segundo argumento de la función query
+                    conexion.query(sql, [nmedicamento, nfecha, nhora, ncomentarios], function (error, results, fields) {
+                        if (error) {
+                            console.error(error.message);
+                        } else {
+                            console.log("Registro de tratamiento insertado correctamente en la BD");
+                        }
+                    });
+                    //     //crear nuevo Formulario con los datos a insertar
+                    //     var nuevoFormulario = new Formulario(
+                    //         {
+                    //             nombre: nnombre,
+                    //             fecha: nfecha,
+                    //             email: nemail,
+                    //             comentarios: ncomentarios
+                    //         }
+                    //     );
+                    //     //ejecutar sentencia insertar Formulario
+                    //     nuevoFormulario.save()
+                    //         .then(function () {//despues de ejecutar hacer...
+                    //             console.log("Formulario insertado correctamente");
+                    //         })
+                    // });
+                    break;
             default:
                 res.end("Pagina no encontrada");
                 break;
@@ -182,6 +233,7 @@ servidor.createServer(function (req, res) {
         //     res.write(footerData);
         //     // res.end(); // Finalizar la respuesta después de enviar el pie de página
         // });
+
     });
 
     //Formulario de la url visitada por el usuario
@@ -193,5 +245,6 @@ servidor.createServer(function (req, res) {
             if (err) throw err;
         });
     }
+
 
 }).listen(8080) //puerto 8080
